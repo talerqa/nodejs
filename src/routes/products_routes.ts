@@ -11,7 +11,6 @@ productsRoute.get('/', (req: Request, res: Response) => {
     res.send(products.filter(p => p.title.indexOf(title) > -1))
   } else {
     res.send(products)
-
   }
 })
 productsRoute.get('/:id', (req: Request, res: Response) => {
