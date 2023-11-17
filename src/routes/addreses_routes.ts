@@ -1,16 +1,16 @@
 import {Request, Response, Router} from "express";
 
-const address = [{id: 1, value: 'Nezalejnosti'}, {id: 2, title: 'Selickaga'}]
+const addressArray = [{id: 1, value: 'Nezalejnosti'}, {id: 2, title: 'Selickaga'}]
 
 export const addressesRoute = Router({})
 
 addressesRoute.get('/', (req: Request, res: Response) => {
-  res.send(address)
+  res.send(addressArray)
 })
 addressesRoute.get('/:id', (req: Request, res: Response) => {
-  const adress = address.find(product => product.id === +req.params.id)
-  if (adress) {
-    res.send(adress)
+  const address = addressArray.find(product => product.id === +req.params.id)
+  if (address) {
+    res.send(address)
   } else {
     res.send(404)
   }
