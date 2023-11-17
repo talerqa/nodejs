@@ -12,8 +12,15 @@ app.get('/', (req: Request, res: Response) => {
 const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'orange'}]
 const address = [{id: 1, value: 'Nezalejnosti'}, {id: 2, title: 'Selickaga'}]
 
-const parserMiddleWare = bodyParser({})
-app.use(parserMiddleWare)
+// const parserMiddleWare = bodyParser({})
+// app.use(parserMiddleWare)
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
 
 app.get('/products/', (req: Request, res: Response) => {
   const title = req.query.title as string
