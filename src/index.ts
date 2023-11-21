@@ -4,7 +4,7 @@ import {productsRoute} from "./routes/products_routes";
 import {addressesRoute} from "./routes/addreses_routes";
 
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || '5000'
 
 const parserMiddleWare = bodyParser({})
 app.use(parserMiddleWare)
@@ -15,4 +15,4 @@ app.get("/", function (request, response) {
 app.use('/products', productsRoute)
 app.use('/addresses', addressesRoute)
 
-app.listen(port)
+app.listen( port)
