@@ -3,7 +3,7 @@ const addressArray = [{id: 1, value: 'Nezalejnosti'}, {
   title: 'Selickaga'
 }]
 
-const addressesRepository = {
+export const addressesRepository = {
   getAddresses() {
     return addressArray
   },
