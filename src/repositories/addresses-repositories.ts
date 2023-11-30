@@ -1,13 +1,15 @@
-const addressArray = [{id: 1, value: 'Nezalejnosti'}, {
+export type AddressType = { id: number, title: string }
+
+const addressArray: AddressType[] = [{id: 1, title: 'Nezalejnosti'}, {
   id: 2,
   title: 'Selickaga'
 }]
 
 export const addressesRepository = {
-  getAddresses() {
+  async getAddresses(): Promise<AddressType[]> {
     return addressArray
   },
-  getAddressById(id: number) {
+  async getAddressById(id: number): Promise<AddressType | undefined> {
     return addressArray.find(product => product.id === id)
   }
 }

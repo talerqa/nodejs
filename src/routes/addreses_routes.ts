@@ -4,13 +4,12 @@ import {addressesRepository} from "../repositories/addresses-repositories";
 
 export const addressesRoute = Router({})
 
-addressesRoute.get('/', (req: Request, res: Response) => {
-   const addresses = addressesRepository.getAddresses()
+addressesRoute.get('/', async (req: Request, res: Response) => {
+  const addresses = await addressesRepository.getAddresses()
   res.send(addresses)
 })
-addressesRoute.get('/:id', (req: Request, res: Response) => {
-
-  const address = addressesRepository.getAddressById(+req.params.id)
+addressesRoute.get('/:id', async (req: Request, res: Response) => {
+  const address = await addressesRepository.getAddressById(+req.params.id)
   if (address) {
     res.send(address)
   } else {
