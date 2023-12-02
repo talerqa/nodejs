@@ -40,9 +40,4 @@ app.listen(port, () => {
   console.log(port)
 })
 
-const handler = (req: any, res: any) => {
-  const d = new Date()
-  res.end(d.toString())
-}
-
-module.exports = allowCors(handler)
+module.exports = allowCors(app)
