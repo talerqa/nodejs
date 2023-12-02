@@ -32,15 +32,17 @@ const allowCors = (fn: any) => async (req: any, res: any) => {
   return await fn(req, res)
 }
 
-const handler = (req: any, res: any) => {
-  const d = new Date()
-  res.end(d.toString())
-}
 
-module.exports = allowCors(handler)
 app.use('/products', productsRoute)
 app.use('/addresses', addressesRoute)
 
 app.listen(port, () => {
   console.log(port)
 })
+
+const handler = (req: any, res: any) => {
+  const d = new Date()
+  res.end(d.toString())
+}
+
+module.exports = allowCors(handler)
