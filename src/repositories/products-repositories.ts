@@ -1,10 +1,5 @@
-export type ProductType = { id: number, title: string, bio: string }
+import {products, ProductType} from "./store";
 
-const products: ProductType[] = [{id: 1, title: 'tomato', bio: ''}, {
-  id: 2,
-  title: 'orange',
-  bio: ''
-}]
 
 export const productsRepositories = {
   async getAllProducts() {
@@ -26,11 +21,22 @@ export const productsRepositories = {
     return products
   },
 
-  async updateProduct({id, title, bio}: ProductType): Promise<boolean> {
+  async updateProduct({
+                        id, description,
+                        price,
+                        value,
+                        title,
+                        img,
+                        count
+                      }: ProductType): Promise<boolean> {
     const product = products.find(product => product.id === id)
     if (product) {
+      product.description = description
+      product.price = price
       product.title = title
-      product.bio = bio
+      product.value = value
+      product.img = img
+      product.count = count
       return true
     } else {
       return false

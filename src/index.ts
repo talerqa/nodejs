@@ -1,4 +1,5 @@
-import express from 'express'
+import express from 'express';
+import cors from 'cors'
 import bodyParser from "body-parser";
 import {productsRoute} from "./routes/products_routes";
 import {addressesRoute} from "./routes/addreses_routes";
@@ -11,10 +12,11 @@ const parserMiddleWare = bodyParser({})
 app.use(parserMiddleWare)
 
 app.get("/", function (request, response) {
-  response.send("<h2>Привет Express!</h2>");
+  response.send("<h2>Products</h2>");
 });
 
 
+app.use(cors({origin: '*'}))
 app.use('/products', productsRoute)
 app.use('/addresses', addressesRoute)
 

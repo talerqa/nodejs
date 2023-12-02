@@ -1,7 +1,5 @@
-import {
-  productsRepositories,
-  ProductType
-} from "../repositories/products-repositories";
+import {productsRepositories,} from "../repositories/products-repositories";
+import {ProductType} from "../repositories/store";
 
 export const productService = {
   async getAllProducts() {
@@ -13,12 +11,35 @@ export const productService = {
   async findProductById(id: number): Promise<ProductType | undefined> {
     return await productsRepositories.findProductById(id)
   },
-  async createProduct(title: string, bio: string): Promise<ProductType[]> {
-    const newProduct = {id: +new Date(), title, bio}
+  async createProduct(description: string,
+                      price: number,
+                      value: string,
+                      title: string,
+                      img: string,
+                      count: number,): Promise<ProductType[]> {
+    const newProduct = {
+      id: +new Date(), description,
+      price,
+      value,
+      title,
+      img,
+      count
+    }
     return await productsRepositories.createProduct(newProduct)
   },
-  async updateProduct({id, title, bio}: ProductType): Promise<boolean> {
-    return await productsRepositories.updateProduct({id, title, bio})
+  async updateProduct({id, description,
+                        price,
+                        value,
+                        title,
+                        img,
+                        count}: ProductType): Promise<boolean> {
+    return await productsRepositories.updateProduct({id,description,
+      price,
+      value,
+      title,
+      img,
+      count
+    })
   },
   async deleteProduct(id: number) {
     return await productsRepositories.deleteProduct(id)
