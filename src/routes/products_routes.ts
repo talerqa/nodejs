@@ -12,11 +12,13 @@ export const productsRoute = Router({})
 
 productsRoute.get('/', async (req: Request, res: Response) => {
   let products = await productService.getAllProducts();
-  res.send(products)
-})
-productsRoute.get('/', async (req: Request, res: Response) => {
-  let foundProducts = await productService.findProducts((req.query.title?.toString()));
-  res.send(foundProducts)
+  let foundProducts = await productService.findProducts(req.query.title?.toString().toLowerCase());
+
+  if (req.query?.title) {
+    res.send(foundProducts)
+  } else {
+    res.send(products)
+  }
 })
 productsRoute.post('/',
   titleValidation,

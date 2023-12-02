@@ -7,7 +7,7 @@ export const productsRepositories = {
   },
   async findProducts(title: string | null | undefined): Promise<ProductType[]> {
     if (title) {
-      return products.filter(p => p.title.indexOf(title) > -1)
+      return products.filter(p => p.title.toLowerCase().indexOf(title) > -1)
     } else {
       return products
     }
