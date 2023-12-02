@@ -16,7 +16,7 @@ export const productService = {
                       value: string,
                       title: string,
                       img: string,
-                      count: number,): Promise<ProductType[]> {
+                      count: number): Promise<ProductType[]> {
     const newProduct = {
       id: +new Date(), description,
       price,

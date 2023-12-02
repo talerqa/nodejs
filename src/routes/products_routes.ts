@@ -23,7 +23,14 @@ productsRoute.post('/',
   bioValidation,
   async (req: Request, res: Response) => {
     handlerError(req, res)
-    const newProduct = await productService.createProduct(req.body.title, req.body.bio)
+    const newProduct = await productService.createProduct(
+      req.body.description,
+      req.body.price,
+      req.body.value,
+      req.body.title,
+      req.body.img,
+      req.body.count,
+    )
     res.status(201).send(newProduct)
   })
 productsRoute.get('/:id', async (req: Request, res: Response) => {
@@ -43,7 +50,11 @@ productsRoute.put('/:id',
     const isUpdated = await productService.updateProduct({
       id: +req.params.id,
       title: req.body.title,
-      bio: req.body.bio,
+      description: req.body.description,
+      price: req.body.price,
+      value: req.body.value,
+      img: req.body.img,
+      count: req.body.count,
     })
 
     if (isUpdated) {
