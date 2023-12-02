@@ -17,17 +17,15 @@ export const productsRepositories = {
       return products
     }
   },
-  async createProduct(title: string, bio: string): Promise<ProductType[]> {
-    const newProduct = {id: +new Date(), title, bio}
+  async findProductById(id: number): Promise<ProductType | undefined> {
+    return products.find(product => product.id === id)
+  },
+  async createProduct(newProduct: ProductType): Promise<ProductType[]> {
+
     products.push(newProduct)
     return products
   },
-  async findProductById(id: number): Promise<ProductType | undefined> {
-    const product = products.find(product => product.id === id)
-    if (product) {
-      return product
-    }
-  },
+
   async updateProduct({id, title, bio}: ProductType): Promise<boolean> {
     const product = products.find(product => product.id === id)
     if (product) {

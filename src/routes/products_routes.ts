@@ -1,5 +1,6 @@
 import {Request, Response, Router} from "express";
-import {productsRepositories} from "../repositories/products-repositories";
+import {productService} from '../domain/products-service'
+// import {productsRepositories} from "../repositories/products-repositories";
 import {
   bioValidation,
   handlerError,
@@ -10,11 +11,11 @@ import {
 export const productsRoute = Router({})
 
 productsRoute.get('/', async (req: Request, res: Response) => {
-  let products = await productsRepositories.getAllProducts();
+  let products = await productService.getAllProducts();
   res.send(products)
 })
 productsRoute.get('/', async (req: Request, res: Response) => {
-  let foundProducts = await productsRepositories.findProducts((req.query.title?.toString()));
+  let foundProducts = await productService.findProducts((req.query.title?.toString()));
   res.send(foundProducts)
 })
 productsRoute.post('/',
@@ -22,11 +23,11 @@ productsRoute.post('/',
   bioValidation,
   async (req: Request, res: Response) => {
     handlerError(req, res)
-    const newProduct = await productsRepositories.createProduct(req.body.title, req.body.bio)
+    const newProduct = await productService.createProduct(req.body.title, req.body.bio)
     res.status(201).send(newProduct)
   })
 productsRoute.get('/:id', async (req: Request, res: Response) => {
-  const product = await productsRepositories.findProductById(+req.params.id)
+  const product = await productService.findProductById(+req.params.id)
   if (product) {
     res.send(product)
   } else {
@@ -39,14 +40,14 @@ productsRoute.put('/:id',
   async (req: Request, res: Response) => {
     handlerError(req, res)
 
-    const isUpdated = await productsRepositories.updateProduct({
+    const isUpdated = await productService.updateProduct({
       id: +req.params.id,
       title: req.body.title,
       bio: req.body.bio,
     })
 
     if (isUpdated) {
-      const product = await productsRepositories.findProductById(+req.params.id)
+      const product = await productService.findProductById(+req.params.id)
       res.status(200).send(product)
     } else {
       res.send(404)
@@ -55,7 +56,7 @@ productsRoute.put('/:id',
 
 productsRoute.delete('/:id', async (req: Request, res: Response) => {
 
-  const isDeleted = await productsRepositories.deleteProduct(+req.params.id)
+  const isDeleted = await productService.deleteProduct(+req.params.id)
 
   if (isDeleted) {
     res.send(204)
